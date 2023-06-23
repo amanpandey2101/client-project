@@ -9,7 +9,7 @@ const distributorRoutes = require("./routes/distributor/auth");
 const cors = require('cors')
 env.config();
 
-mongoose.connect(`mongodb+srv://${process.env.MONGO_DB_USER}:${process.env.MONGO_DB_PASS}@cluster1.gpclwgk.mongodb.net/?retryWrites=true&w=majority`)
+mongoose.connect(`mongodb+srv://${process.env.MONGO_DB_USER}:${process.env.MONGO_DB_PASS}@cluster0.nbrbz9k.mongodb.net/?retryWrites=true&w=majority`)
 .then(()=>{
     console.log("Database connected");
 });
