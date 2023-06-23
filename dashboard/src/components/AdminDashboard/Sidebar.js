@@ -1,142 +1,78 @@
-import { useState } from "react";
-import Sections from "../../constants/section";
+import React, { useEffect } from 'react';
+import Sections from '../../constants/section';
 
-export default function Sidebar() {
-  const [open, setOpen] = useState(false);
+const Sidebar = () => {
+  useEffect(() => {
+    const separatorSidebar = document.getElementById('separator-sidebar');
+    const separatorSidebarToggle = document.querySelector('[data-drawer-toggle="separator-sidebar"]');
+    
+    const handleToggleSidebar = () => {
+      separatorSidebar.classList.toggle('-translate-x-full');
+    };
+  
+    separatorSidebarToggle.addEventListener('click', handleToggleSidebar);
+  
+    return () => {
+      separatorSidebarToggle.removeEventListener('click', handleToggleSidebar);
+    };
+  }, []);
 
   return (
-    <div className="flex h-fit relative top-[12vh]">
-      {/* Sidebar */}
-      <div
-        className={`${
-          open ? "w-40" : "w-60"
-        } fixed inset-y-0 left-0 z-10 flex flex-col h-auto p-3 bg-gray-800 shadow duration-300`}
+    <div>
+      <button
+        data-drawer-target="separator-sidebar"
+        data-drawer-toggle="separator-sidebar"
+        aria-controls="separator-sidebar"
+        type="button"
+        className="inline-flex items-center p-2 mt-2 ml-3 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
       >
-        <div className="space-y-3">
-          <div className="flex items-center justify-between">
-            <h2 className="text-xl font-bold text-white">Dashboard</h2>
-            <button
-              onClick={() => setOpen(!open)}
-              className="lg:hidden focus:outline-none"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="w-6 h-6 text-white"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth={2}
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M4 6h16M4 12h8m-8 6h16"
-                />
-              </svg>
-            </button>
-          </div>
-          <div className="relative">
-            <span className="absolute inset-y-0 left-0 flex items-center py-4">
-              <button
-                type="submit"
-                className="p-2 focus:outline-none focus:ring"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="w-6 h-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  strokeWidth={2}
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                  />
-                </svg>
-              </button>
-            </span>
-            <input
-              type="search"
-              name="Search"
-              placeholder="Search..."
-              className="w-full py-2 pl-10 text-sm rounded-md focus:outline-none"
-            />
-          </div>
-          <div className="flex-1">
-            <ul className="pt-2 pb-4 space-y-1 text-sm">
-              {Sections.map((section, index) => (
-                <li
-                  className="rounded-sm hover:bg-gray-500"
-                  key={index}
+        <span className="sr-only">Open sidebar</span>
+        <svg
+          className="w-6 h-6"
+          aria-hidden="true"
+          fill="currentColor"
+          viewBox="0 0 20 20"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            clipRule="evenodd"
+            fillRule="evenodd"
+            d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z"
+          ></path>
+        </svg>
+      </button>
+
+      <aside
+        id="separator-sidebar"
+        className="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0 sm:w-20 md:w-64"
+        aria-label="Sidebar"
+      >
+        <div className="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">
+          <h1 className="flex justify-center font-bold text-3xl mb-4 mt-4">Dashboard</h1>
+          <ul className="space-y-2 font-medium">
+            {Sections.map((section, index) => (
+              <li className="hover:cursor-pointer" key={index}>
+                <a
+                  href={section.route}
+                  className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
                   value={section.name}
                 >
-                  <a
-                    href="/"
-                    className="flex items-center p-2 space-x-3 rounded-md"
-                  >
-                    <span className="text-gray-100">{section.name}</span>
-                  </a>
-                </li>
-              ))}
-              <li className="rounded-sm">
-                <a
-                  href="/"
-                  className="flex items-center p-2 space-x-3 rounded-md"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="w-6 h-6 text-gray-100"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    strokeWidth={2}
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"
-                    />
-                  </svg>
-                  <span className="text-gray-100">Logout</span>
+                  <span className="ml-3">{section.name}</span>
                 </a>
               </li>
-            </ul>
-          </div>
+            ))}
+          </ul>
         </div>
-      </div>
+      </aside>
 
-      {/* Main Content */}
-      <div className="flex-1 bg-white">
-        <div className="container mx-auto">
-          <div className="grid grid-cols-1 gap-6 mb-6 lg:grid-cols-4">
-            <div className="w-full px-4 py-5 bg-white rounded-lg shadow">
-              <div className="text-sm font-medium text-gray-500 truncate">
-                Total Business
-              </div>
-              {/* <div className="mt-1 text-3xl font-semibold text-gray-900">
-                  12,00
-              </div> */}
-            </div>
-            <div className="w-full px-4 py-5 bg-white rounded-lg shadow">
-              <div className="text-sm font-medium text-gray-500 truncate">
-                Super Total Commision
-              </div>
-            </div>
-            <div className="w-full px-4 py-5 bg-white rounded-lg shadow">
-              <div className="text-sm font-medium text-gray-500 truncate">
-                Distributor Total Commision
-              </div>
-            </div>
-            <div className="w-full px-4 py-5 bg-white rounded-lg shadow">
-              <div className="text-sm font-medium text-gray-500 truncate">
-                AdminEarning
-              </div>
-            </div>
-          </div>
-        </div>
+      <div className="grid grid-cols-4 gap-32 mx-auto">
+        <div>Total Business</div>
+        <div>Total Business</div>
+        <div>Total Business</div>
+        <div>Total Business</div>
       </div>
     </div>
   );
-}
+};
+
+export default Sidebar;

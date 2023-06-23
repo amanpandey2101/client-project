@@ -4,7 +4,7 @@ import Login from "../components/Auth/Login"
 
 export default function LoginPage(){
     return(
-        <div className=" w-full space-y-0 flex justify-between m-auto shadow-2xl">
+        <div className=" w-full space-y-0 flex justify-between m-auto shadow-2xl max-[768px]:h-screen">
             <div className="m-auto bg-slate-300 p-10 rounded-[20px] shadow-2xl">
 
             <Header

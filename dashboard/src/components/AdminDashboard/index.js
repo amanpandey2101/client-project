@@ -3,10 +3,10 @@ import Sidebar from './Sidebar'
 
 function AdminDashboard() {
   return (
-    
+      <>
       <Sidebar/>
-    
-   
+      </>
+  
   )
 }
 
