@@ -4,7 +4,8 @@ import Login from "../components/Auth/Login"
 
 export default function LoginPage(){
     return(
-        <div className="max-w-md w-full space-y-8">
+        <div className=" w-full space-y-0 flex justify-between m-auto shadow-2xl">
+            <div className="m-auto bg-slate-300 p-10 rounded-[20px] shadow-2xl">
 
             <Header
                 heading="Login to your account"
@@ -13,6 +14,11 @@ export default function LoginPage(){
                 linkUrl="/signup"
                 />
                 <Login/>
+            </div>
+                <div  className="relative max-[950px]:hidden ml-4 "  >
+                <img src={require("../assets/pic3.jpg")} className='w-[48rem] h-[88vh]' alt=""  />
+
+                </div>
         </div>
     )
 }

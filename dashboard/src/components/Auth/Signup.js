@@ -13,6 +13,7 @@ fields.forEach(field => fieldsState[field.id]='');
 export default function Signup(){
   const [signupState,setSignupState]=useState(fieldsState);
   const [signupSuccess, setSignupSuccess] = useState(false);
+  const [emailError, setEmailError] = useState(false);
 
   const handleChange=(e)=>setSignupState({...signupState,[e.target.id]:e.target.value});
 
@@ -60,10 +61,16 @@ export default function Signup(){
         setSignupSuccess(true);
         
       })
-      .catch(error => {
+      .catch((error) => {
         // Handle the error (e.g., show error message, etc.)
         console.log(error);
+        if (error.response && error.response.status === 409) {
+          
+          setEmailError(true);
+          alert("This email is already registered");
+        }
       });
+    
       
     };
     if (signupSuccess) {
