@@ -119,6 +119,9 @@ const Sidebar = () => {
           <PiUserCircleThin size={44} className="hover:h-12 hover:w-12 transition-all ease-in-out duration-150" />
         </div>
       </div>
+      <div className="relative top-72 flex justify-center bg-[#42e33d] z-10 max-[768px]:top-6">
+        <h2>100% Permission</h2>
+      </div>
 
     </div>
   );
