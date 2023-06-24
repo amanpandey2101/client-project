@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Sections from "../../constants/section";
 import { GrClose } from "react-icons/gr";
+import { PiUserCircleThin } from "react-icons/pi";
 
 const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -67,6 +68,8 @@ const Sidebar = () => {
         >
           <GrClose size={20} />
         </button>
+        
+
         <div className="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">
           <h1 className="flex justify-center font-bold text-3xl mb-4 mt-4">
             Dashboard
@@ -96,23 +99,27 @@ const Sidebar = () => {
         </div>
         <div className="bg-white dark:bg-gray-900 rounded-lg shadow-lg p-4 text-center">
           <h2 className="text-gray-900 dark:text-white text-lg font-semibold">
-            Super Total Commission
+          Distributor Commision
           </h2>
           <p className="text-gray-600 dark:text-gray-300 text-sm">500</p>
         </div>
         <div className="bg-white dark:bg-gray-900 rounded-lg shadow-lg p-4 text-center">
           <h2 className="text-gray-900 dark:text-white text-lg font-semibold">
-            Distributor Total Commission
+          Retailer  Commision            
           </h2>
           <p className="text-gray-600 dark:text-gray-300 text-sm">300</p>
         </div>
         <div className="bg-white dark:bg-gray-900 rounded-lg shadow-lg p-4 text-center">
           <h2 className="text-gray-900 dark:text-white text-lg font-semibold">
-            Admin Earning
+          Your Earning 
           </h2>
           <p className="text-gray-600 dark:text-gray-300 text-sm">10000</p>
         </div>
+        <div className="absolute top-4 right-4 hover:cursor-pointer">
+          <PiUserCircleThin size={44} className="hover:h-12 hover:w-12 transition-all ease-in-out duration-150" />
+        </div>
       </div>
+
     </div>
   );
 };
