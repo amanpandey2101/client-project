@@ -14,7 +14,7 @@ const fields = loginFields;
 const fieldsState = {};
 fields.forEach(field => (fieldsState[field.id] = ''));
 
-const Login = () => {
+const Login = ({onLoginSuccess}) => {
   const navigate = useNavigate();
   const [loginState, setLoginState] = useState(fieldsState);
   const [loginError, setLoginError] = useState(null);
@@ -63,6 +63,7 @@ const Login = () => {
         const token = response.data.token;
         localStorage.setItem('token', token);
         localStorage.setItem('role', role);
+        onLoginSuccess(role);
 
         navigate(`/${role}Dashboard`);
       })

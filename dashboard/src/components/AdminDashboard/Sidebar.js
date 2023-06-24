@@ -1,21 +1,33 @@
-import React, { useEffect } from 'react';
-import Sections from '../../constants/section';
+import React, { useEffect, useState } from "react";
+import Sections from "../../constants/section";
+import { GrClose } from "react-icons/gr";
 
 const Sidebar = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
   useEffect(() => {
-    const separatorSidebar = document.getElementById('separator-sidebar');
-    const separatorSidebarToggle = document.querySelector('[data-drawer-toggle="separator-sidebar"]');
-    
+    const separatorSidebar = document.getElementById("separator-sidebar");
+    const separatorSidebarToggle = document.querySelector(
+      '[data-drawer-toggle="separator-sidebar"]'
+    );
+
     const handleToggleSidebar = () => {
-      separatorSidebar.classList.toggle('-translate-x-full');
+      separatorSidebar.classList.toggle("-translate-x-full");
+      setIsOpen(!isOpen);
     };
-  
-    separatorSidebarToggle.addEventListener('click', handleToggleSidebar);
-  
+
+    separatorSidebarToggle.addEventListener("click", handleToggleSidebar);
+
     return () => {
-      separatorSidebarToggle.removeEventListener('click', handleToggleSidebar);
+      separatorSidebarToggle.removeEventListener("click", handleToggleSidebar);
     };
-  }, []);
+  }, [isOpen]);
+
+  const handleCloseSidebar = () => {
+    const separatorSidebar = document.getElementById("separator-sidebar");
+    separatorSidebar.classList.toggle("-translate-x-full");
+    setIsOpen(false);
+  };
 
   return (
     <div>
@@ -26,7 +38,7 @@ const Sidebar = () => {
         type="button"
         className="inline-flex items-center p-2 mt-2 ml-3 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
       >
-        <span className="sr-only">Open sidebar</span>
+        <span className="sr-only">Toggle sidebar</span>
         <svg
           className="w-6 h-6"
           aria-hidden="true"
@@ -44,11 +56,21 @@ const Sidebar = () => {
 
       <aside
         id="separator-sidebar"
-        className="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0 sm:w-20 md:w-64"
+        className={`fixed top-0 left-0 z-40 w-64 h-screen transition-transform ${
+          isOpen ? "" : "-translate-x-full"
+        } sm:translate-x-0 sm:w-20 md:w-64`}
         aria-label="Sidebar"
       >
+        <button
+          onClick={handleCloseSidebar}
+          className="mt-6 relative left-52 min-[768px]:hidden text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300"
+        >
+          <GrClose size={20} />
+        </button>
         <div className="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">
-          <h1 className="flex justify-center font-bold text-3xl mb-4 mt-4">Dashboard</h1>
+          <h1 className="flex justify-center font-bold text-3xl mb-4 mt-4">
+            Dashboard
+          </h1>
           <ul className="space-y-2 font-medium">
             {Sections.map((section, index) => (
               <li className="hover:cursor-pointer" key={index}>
@@ -65,11 +87,31 @@ const Sidebar = () => {
         </div>
       </aside>
 
-      <div className="grid grid-cols-4 gap-32 mx-auto">
-        <div>Total Business</div>
-        <div>Total Business</div>
-        <div>Total Business</div>
-        <div>Total Business</div>
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mt-8 md:ml-72">
+        <div className="bg-white dark:bg-gray-900 rounded-lg shadow-lg p-4 text-center">
+          <h2 className="text-gray-900 dark:text-white text-lg font-semibold">
+            Total Business
+          </h2>
+          <p className="text-gray-600 dark:text-gray-300 text-sm">1000</p>
+        </div>
+        <div className="bg-white dark:bg-gray-900 rounded-lg shadow-lg p-4 text-center">
+          <h2 className="text-gray-900 dark:text-white text-lg font-semibold">
+            Super Total Commission
+          </h2>
+          <p className="text-gray-600 dark:text-gray-300 text-sm">500</p>
+        </div>
+        <div className="bg-white dark:bg-gray-900 rounded-lg shadow-lg p-4 text-center">
+          <h2 className="text-gray-900 dark:text-white text-lg font-semibold">
+            Distributor Total Commission
+          </h2>
+          <p className="text-gray-600 dark:text-gray-300 text-sm">300</p>
+        </div>
+        <div className="bg-white dark:bg-gray-900 rounded-lg shadow-lg p-4 text-center">
+          <h2 className="text-gray-900 dark:text-white text-lg font-semibold">
+            Admin Earning
+          </h2>
+          <p className="text-gray-600 dark:text-gray-300 text-sm">10000</p>
+        </div>
       </div>
     </div>
   );
