@@ -31,13 +31,13 @@ export default function Signup(){
     let apiEndpoint;
     switch (role) {
       case 'admin':
-        apiEndpoint = 'http://localhost:3000/api/admin/signup';
+        apiEndpoint = 'https://client-project-sxwg.onrender.com/api/admin/signup';
         break;
       case 'superadmin':
-        apiEndpoint = 'http://localhost:3000/api/superadmin/signup';
+        apiEndpoint = 'https://client-project-sxwg.onrender.com/api/superadmin/signup';
         break;
       case 'distributor':
-        apiEndpoint = 'http://localhost:3000/api/distributor/signup';
+        apiEndpoint = 'https://client-project-sxwg.onrender.com/api/distributor/signup';
         break;
       default:
         console.error("invalid role")

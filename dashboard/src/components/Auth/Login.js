@@ -32,13 +32,13 @@ const Login = ({onLoginSuccess}) => {
     let apiEndpoint;
     switch (role) {
       case 'admin':
-        apiEndpoint = 'http://localhost:3000/api/admin/signin';
+        apiEndpoint = 'https://client-project-sxwg.onrender.com/api/admin/signin';
         break;
       case 'superadmin':
-        apiEndpoint = 'http://localhost:3000/api/superadmin/signin';
+        apiEndpoint = 'https://client-project-sxwg.onrender.com/api/superadmin/signin';
         break;
       case 'distributor':
-        apiEndpoint = 'http://localhost:3000/api/distributor/signin';
+        apiEndpoint = 'https://client-project-sxwg.onrender.com/api/distributor/signin';
         break;
       default:
         console.error("invalid role");

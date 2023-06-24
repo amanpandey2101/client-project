@@ -5,8 +5,8 @@ import Signup from "../components/Auth/Signup";
 
 export default function SignupPage(){
     return(
-        <div className=" w-full space-y-0 flex justify-between m-auto shadow-2xl">
-             <div className="m-auto bg-slate-300 p-10 rounded-[20px] shadow-xl mb-8 mt-8">
+        <div className=" w-[max-content] h-[max-content] p-4 flex justify-between m-auto shadow-2xl" >
+             <div className="w-[30rem] m-auto bg-slate-300 p-12 rounded-[20px] shadow-xl mb-8 mt-8 max-[768px]:w-[25rem] h-[fit-content]">
             <Header
               heading="Signup to create an account"
               paragraph="Already have an account? "
