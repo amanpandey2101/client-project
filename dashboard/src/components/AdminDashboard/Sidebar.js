@@ -73,9 +73,9 @@ const Sidebar = () => {
           </h1>
           <ul className="space-y-2 font-medium">
             {Sections.map((section, index) => (
-              <li className="hover:cursor-pointer" key={index}>
+              <li className="hover:cursor-pointer" key={index} value={section.path}>
                 <a
-                  href={section.route}
+                  href={section.path}
                   className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
                   value={section.name}
                 >
