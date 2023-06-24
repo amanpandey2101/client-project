@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Navigate,Routes, Route } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 import { loginFields } from "../../constants/formFields";
@@ -15,8 +15,8 @@ const fieldsState = {};
 fields.forEach(field => (fieldsState[field.id] = ''));
 
 const Login = () => {
+  const navigate = useNavigate();
   const [loginState, setLoginState] = useState(fieldsState);
-  const [loginSuccess, setLoginSuccess] = useState(false);
   const [loginError, setLoginError] = useState(null);
 
   const handleChange = (e) => {
@@ -64,7 +64,7 @@ const Login = () => {
         localStorage.setItem('token', token);
         localStorage.setItem('role', role);
 
-        setLoginSuccess(true);
+        navigate(`/${role}Dashboard`);
       })
       .catch(error => {
         // Handle the error (e.g., show error message, etc.)
@@ -73,27 +73,11 @@ const Login = () => {
       });
   };
 
-  if (loginSuccess) {
-    const { role } = loginState;
-
-    switch (role) {
-      case 'admin':
-        return <AdminDashboard />;
-      case 'superadmin':
-        return <SuperAdminDashboard />;
-      case 'distributor':
-        return <DistributorDashboard />;
-      default:
-        break;
-    }
-  }
-
   const radioOptions = [
     { label: 'Admin', value: 'admin' },
     { label: 'Superadmin', value: 'superadmin' },
     { label: 'Distributor', value: 'distributor' },
   ];
-
 
   return (
     <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
